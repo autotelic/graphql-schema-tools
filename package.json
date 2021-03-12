@@ -1,9 +1,9 @@
 {
-  "name": "@autotelic/gql-schema-normalizer",
+  "name": "@autotelic/graphql-schema-tools",
   "version": "0.0.0",
-  "description": "Normalize GraphQL string schemas.",
+  "description": "Tools for GraphQL schemas.",
   "main": "index.js",
-  "files": [],
+  "files": ["lib"],
   "scripts": {
     "lint": "standard",
     "test": "tap --100 -j1 -R classic",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/autotelic/gql-schema-normalizer.git"
+    "url": "git+https://github.com/autotelic/graphql-schema-tools.git"
   },
   "keywords": [
     "GraphQL",
@@ -22,9 +22,9 @@
   "author": "Holden Whitehead <holden@autotelic.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/autotelic/gql-schema-normalizer/issues"
+    "url": "https://github.com/autotelic/graphql-schema-tools/issues"
   },
-  "homepage": "https://github.com/autotelic/gql-schema-normalizer#readme",
+  "homepage": "https://github.com/autotelic/graphql-schema-tools#readme",
   "devDependencies": {
     "graphql": "^15.5.0",
     "standard": "^16.0.3",

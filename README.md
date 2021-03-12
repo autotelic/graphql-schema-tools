@@ -1,19 +1,25 @@
-# gql-schema-normalizer
-
-Normalize GraphQL string schemas.
+# GraphQL Schema Tools
 
 ### Usage
 
 ```sh
-npm i @autotelic/gql-schema-normalizer
+npm i @autotelic/graphql-schema-tools
 ```
 
+### API
+
+#### `normalizeGQLSource`: `(source: string) => object`
+
 When passed a string GQL source, `normalizeGQLSource` groups top-level declarations by kind and then alphabetizes them along with their fields, directives, arguments, values, types, interfaces, and locations - all by name.
+
+Returns an object with the following properties:
+  - `source`: `string`- The normalized GQL source.
+  - `error`: `GraphQLError | undefined` - If an error occurs, it will be added here.
 
 #### Example
 
 ```js
-const normalizeGQLSource = require('@autotelic/gql-schema-normalizer')
+const { normalizeGQLSource } = require('@autotelic/graphql-schema-tools')
 
 const schema = `
   type Query {
@@ -44,6 +50,7 @@ const schema = `
 `
 
 const { source, error } = normalizeGQLSource(schema)
+
 ```
 
 Given the above `schema`, the returned `source` would look like:
@@ -75,12 +82,5 @@ type Query {
   customer(id: ID): Customer
   products(category: String, priceOver: Float, priceUnder: Float): [Products]! @cacheControl(maxAge: 2000, scope: PUBLIC) @paginate
 }
+
 ```
-
-### API
-
-#### `normalizeGQLSource`: `(source: string) => object`
-
-Returns an object with the following properties:
-  - `source`: `string`- The normalized GQL source.
-  - `error`: `GraphQLError | undefined` - If an error occurs, it will be added here.
