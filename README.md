@@ -116,7 +116,7 @@ const minified = minifyGQLSource(schema)
 
 #### `enhanceGQLSyntaxError`: `(error: GraphQLError) => GraphQLError`
 
-If the provided `error` contains `source` and `locations` properties, `enhanceGQLSyntaxError` will return the provided `GraphQLError` with a modified `message` - containing a condensed snipped of where in the source the error occurred.
+If the provided `error` contains `source` and `locations` properties, `enhanceGQLSyntaxError` will return the provided `GraphQLError` with a modified `message` - containing a condensed snippet showing where in the source the error occurred.
 
 ##### Example
 
