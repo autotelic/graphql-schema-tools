@@ -12,17 +12,19 @@ npm i @autotelic/graphql-schema-tools
   - [`normalizeGQLSource`](#normalizegqlsource-source-string-options-object--object)
   - [`minifyGQLSource`](#minifygqlsource-source-string--string)
   - [`enhanceGQLSyntaxError`](#enhancegqlsyntaxerror-error-graphqlerror--graphqlerror)
+  - [`printSDL`](#printsdl-schema-graphqlschema-options-object--documentnode)
+  - [`astFromSchema`](#astfromschema-schema-graphqlschema-options-object--documentnode)
 
 #### `normalizeGQLSource`: `(source: string, options?: object) => object`
 
 When passed a string GQL source, `normalizeGQLSource` groups top-level declarations by kind and then alphabetizes them along with their fields, directives, arguments, values, types, interfaces, and locations - all by name.
 
 Accepts an optional `options` object containing the following properties:
-  - `minify`: `boolean` - If `true`, the returned source will have all redundant whitespace stripped out. Defaults to `false`.
+  - **`minify`: `boolean`** - If `true`, the returned source will have all redundant whitespace stripped out. Defaults to `false`.
 
 Returns an object with the following properties:
-  - `source`: `string`- The normalized GQL source.
-  - `error`: `GraphQLError | undefined` - If an error occurs, it will be added here.
+  - **`source`: `string`**- The normalized GQL source.
+  - **`error`: `GraphQLError | undefined`** - If an error occurs, it will be added here.
 
 ##### Example
 
@@ -141,4 +143,46 @@ try {
   console.log(enhancedError.message)
   // Logs: 'Syntax Error: Unexpected "}". Found near: `bar: String } }`.'
 }
+```
+
+#### `printSDL`: `(schema: GraphQLSchema, options: object) => DocumentNode`
+
+Returns an SDL string representation of the provided `schema`.
+
+Accepts an optional `options` object containing the following properties:
+
+ - **`minify`: `boolean`** - If `true`, the returned source will have all redundant whitespace stripped out. Defaults to `false`.
+ - **`filterTypes`: `string[] | (GraphQLNamedType) => boolean`** - Accepts an array of type names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
+ - **`filterDirectives`: `string[] | (GraphQLDirective) => boolean`** - Accepts an array of directive names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
+
+##### Example
+
+```js
+const { printSDL } = require('@autotelic/graphql-schema-tools')
+const federatedSchema = require('./schema')
+
+const SDL = printSDL(federatedSchema, {
+  minify: true,
+  filterDirectives: ['key', 'external', 'requires', 'provides', 'extends']
+})
+```
+
+#### `astFromSchema`: `(schema: GraphQLSchema, options: object) => DocumentNode`
+
+Returns an AST representation of the provided `schema`.
+
+Accepts an optional `options` object containing the following properties:
+
+ - **`filterTypes`: `string[] | (GraphQLNamedType) => boolean`** - Accepts an array of type names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
+ - **`filterDirectives`: `string[] | (GraphQLDirective) => boolean`** - Accepts an array of directive names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
+
+##### Example
+
+```js
+const { astFromSchema } = require('@autotelic/graphql-schema-tools')
+const federatedSchema = require('./schema')
+
+const document = astFromSchema(federatedSchema, {
+  filterDirectives: ['key', 'external', 'requires', 'provides', 'extends']
+})
 ```
