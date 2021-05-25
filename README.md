@@ -173,9 +173,9 @@ Returns an AST representation of the provided `schema`.
 
 Accepts an optional `options` object containing the following properties:
 
- - **`filterTypes`: `string[] | (GraphQLNamedType) => boolean`** - Accepts an array of type names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
- - **`filterDirectives`: `string[] | (GraphQLDirective) => boolean`** - Accepts an array of directive names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
- - **`filterFields`: `{ [string]: string[] } | (GraphQLDirective) => boolean`** - Accepts an Object with keys of type names and values of arrays of field names to filter out of the returned AST. Alternatively a custom filter function can be passed in.
+ - **`filterTypes`: `string[] | (TypeDefinitionNode) => boolean`** - Accepts an array of type names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
+ - **`filterDirectives`: `string[] | (DirectiveDefinitionNode) => boolean`** - Accepts an array of directive names that will be filtered out of the returned AST. Alternatively a custom filter function can be passed in.
+ - **`filterFields`: `{ [string]: string[] } | (FieldDefinitionNode, TypeDefinitionNode) => boolean`** - Accepts an object with keys of type names and values of arrays of field names to filter out of the returned AST. Alternatively a custom filter function can be passed in - the function will receive the current field (`FieldDefinitionNode`) and the parent type (`TypeDefinitionNode`).
 
 ##### Example
 
