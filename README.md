@@ -163,7 +163,11 @@ const federatedSchema = require('./schema')
 
 const SDL = printSDL(federatedSchema, {
   minify: true,
-  filterDirectives: ['key', 'external', 'requires', 'provides', 'extends']
+  filterDirectives: ['key', 'external', 'requires', 'provides', 'extends'],
+  filterFields: {
+    Query: ['_service', '_entities']
+  },
+  filterTypes: ['_Any', '_FieldSet', '_Service']
 })
 ```
 
@@ -187,6 +191,7 @@ const document = astFromSchema(federatedSchema, {
   filterDirectives: ['key', 'external', 'requires', 'provides', 'extends'],
   filterFields: {
     Query: ['_service', '_entities']
-  }
+  },
+  filterTypes: ['_Any', '_FieldSet', '_Service']
 })
 ```
