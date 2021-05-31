@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/autotelic/graphql-schema-tools#readme",
   "devDependencies": {
+    "@graphql-tools/stitch": "^7.5.3",
     "graphql": "^15.5.0",
     "standard": "^16.0.3",
     "tap": "^15.0.9"
